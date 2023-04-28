@@ -1,0 +1,3 @@
+# Patterns to exclude from git
+# local overrides for defaults
+*.local

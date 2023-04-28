@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# 'Environment' variables used for script configuration.
+# Customize this for your own installation and save as a file named .env
+# in the top level directory of your TiddlyWiki installation.
+# shellcheck disable=2034  # all assignments will appear unused
+
+VERBOSE=${VERBOSE:-0}           # Increasing 1,2,3 adds additional progress messages
+#LOG=${HOME}/tw.log              # Uncomment for script log - path to log file
+
+# Required in common.sh:
+#TOOLS_PATH=/path/additions/for/extra/commands
+# Defaults to /var/packages/DiagnosisTool/target/too where raqeuired commands are installed.
+
+# Required in daily.sh:
+ARCHIVE="tw_archive.zip"        # name for git archive file to be copied offsite
+OFFSITE="example.com"           # where to push backup archive
+SSH_PORT=22                     # remote site port for rsync / ssh of ARCHIVE
+PROCESS="tiddlywiki"            # name to give `screen` session
+ORIGIN="localhost"              # 'remote' to push git commits to
+
+# Required in start.sh
+SHELL=${SHELL:-/bin/bash}       # screen, used to run node.js, will misbehave if SHELL isn't set
+NOTES_DIR="TiddlyWikiDirectory" # Subdirectory containing TiddlyWiki and node_modules for node.js
+# Needs the first FQDN to enable local network access else any /etc/hosts entry for hostname may confuse
+# A generic fallback determination is used in common.sh because some usages of .env disallow command execution,
+#HOSTNAME=                      # only needed if the fallback fails for you
+PORT=9998                       # available non-privledged port on host for TiddlyWiki server
