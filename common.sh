@@ -64,7 +64,7 @@ setup_log () {
     fi
 }
 
-if [[ -n "$LOG" ]]; then
+if [[ -n "${LOG:+unset}" ]]; then
     setup_log "$LOG"
 fi
 

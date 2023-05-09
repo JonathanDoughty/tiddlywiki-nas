@@ -23,9 +23,19 @@ config() {
     HELPDESKURL="http://${HOSTNAME}:${PORT}/"
     SESSION=tiddlywiki
 
-    printf -v START_CMD "./node_modules/.bin/tiddlywiki '%s' --listen port='%s' host='%s' %s" \
-           "$NOTES_DIR" "$PORT" "$HOSTNAME" "${OPTIONS:-}"
-    # Execute usinhg screen (or tmux) to enable re-connecting to see errors that may be reported.
+    # Note that, despite convention, I use a local installationn of tiddlywiki,
+    # not an npm -g (global) package. I avoid things that might interact with other
+    # installations and I certainly avoid doing so with `sudo`.
+    if [[ -z "${PRE_RELEASE:+unset}" ]]; then
+        printf -v START_CMD  \
+               "./node_modules/.bin/tiddlywiki '%s' --listen port='%s' host='%s' %s" \
+               "$NOTES_DIR" "$PORT" "$HOSTNAME" "${OPTIONS:-}"
+    else
+        printf -v START_CMD  \
+               "cd %s; ./tiddlywiki.js '%s' --listen port='%s' host='%s' %s" \
+               "$PRE_RELEASE" "${PWD}/$NOTES_DIR" "$PORT" "$HOSTNAME" "${OPTIONS:-}"
+    fi
+    # Execute using screen (or tmux) to enable re-connecting to see errors that may be reported.
     # screen is used here because macOS includes it by default.
     printf -v START_CMD "screen -dmS %s; screen -S %s -p 0 -X stuff \"%s\"" \
            "$SESSION" "$SESSION" "${START_CMD}"
