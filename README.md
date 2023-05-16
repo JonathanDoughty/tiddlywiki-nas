@@ -50,6 +50,10 @@ This assumes you have a minimal comfort level working on a command line.
    
    Note that as of tiddlywiki 5.2.7 this may result in a warning: "npm
    WARN tar TAR_ENTRY_ERROR ENAMETOOLONG: name too long ..."
+
+   I also install TiddlyWiki as a *local* npm package so that I can install
+   and test pre-release versions of TiddlyWiki without impacting 'production'
+   (and because I resist any tool that suggest I need to `sudo ...` almost anything.
    
 1. `ln -s tiddlywiki-nas/daily.sh tiddlywiki-nas/start.sh . ` - make symbolic
    links in your **app root** directory to the script that will run daily and
@@ -64,6 +68,12 @@ This assumes you have a minimal comfort level working on a command line.
    `.env` copy to adjust environment variables for, e.g., the HOST and
    domain name you use on your internal network, the PORT number node.js 
    will be access, etc., per the comments in that file.
+
+   Note that there is a PRE_RELEASE variable that can be used to check
+   TiddlyWiki pre-release versions. **Warning:** the pre-release version of
+   TiddlyWiki will be use the contents in $NOTES_DIR and other wikis defined
+   by its tiddlywiki.info - make sure any content that could be corrupted by
+   pre-release software has been backed up.
    
 1. Arrange for a nightly git commit and backup. Given the setup above, I used
    Synology's Task Scheduler to create a Scheduled Task to

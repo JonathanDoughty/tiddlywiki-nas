@@ -25,3 +25,4 @@ NOTES_DIR="TiddlyWikiDirectory" # Subdirectory containing TiddlyWiki and node_mo
 # A generic fallback determination is used in common.sh because some usages of .env disallow command execution,
 #HOSTNAME=                      # only needed if the fallback fails for you
 PORT=9998                       # available non-privledged port on host for TiddlyWiki server
+#PRE_RELEASE=/path/to/TiddlyWiki5/clone # for testing pre-release
